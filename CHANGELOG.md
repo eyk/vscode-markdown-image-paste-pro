@@ -3,25 +3,20 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-Types of Changes:
-
-- `Added` for new features.
-- `Changed` for changes in existing functionality.
-- `Deprecated` for soon-to-be removed features.
-- `Removed` for now removed features.
-- `Fixed` for any bug fixes.
-- `Security` in case of vulnerabilities.
 
 ## [Unreleased]
 
-- `Changed` Projekt zur Nutzung bei der SiteFusion 7-Entwicklung erweitert
+### Added
+- Initial VS Code extension structure
+- Basic image paste command for markdown files
+- Configurable image save path, filename prefix, and naming format
+- Keyboard shortcut (Ctrl/Cmd+Shift+V) for quick image pasting
+- Automatic creation of image directories
+- TypeScript build system with ESLint
 
+## [0.1.0] - 2026-01-10
 
-## [0.1.0] - 2021-12-31
-
-- `Added` Foo
-
-## Open Issues
-
-[unreleased]: https://bitbucket.org/sitefusion/sfcode/src/develop/
-[0.1.0]: https://bitbucket.org/sitefusion/sfcode/src/0.1.0/
+### Added
+- Basic extension scaffold
+- Command palette integration
+- Configuration options for image handling
