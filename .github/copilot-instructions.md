@@ -1,6 +1,6 @@
-# TODO: Title of the workspace
+# Markdown Image Paste Pro
 
-TODO: Short description of the purpose of the workspace
+VS Code extension that intercepts pasted Markdown images, prompts for custom filename + alt-text, renames file, updates link
 
 
 ## 🔴 MANDATORY BEHAVIOR RULES
@@ -18,7 +18,9 @@ TODO: Short description of the purpose of the workspace
 
 ## Workspace Structure
 
-TODO: Explain workspace structure
+- `src/extension.ts` - Main extension logic: command registration, paste interception, file operations
+- `package.json` - Extension manifest: commands, keybindings, configuration schema
+- `tsconfig.json` - TypeScript config: ES2020 target, CommonJS modules
 
 ## Speech Abbreviations
 
