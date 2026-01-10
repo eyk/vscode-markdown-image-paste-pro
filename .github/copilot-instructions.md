@@ -34,7 +34,7 @@ German speech recognition poorly recognizes English terms. Interpret these abbre
 
 ## Speech Commands
 
-When these commands appear in speech input, interpret them as correction instructions:
+When these commands appear in speech input, obey their intended meaning:
 
 - **streichen** - Discard the immediately preceding word or phrase that was incorrectly recognized.
 - **Korrektur:** - Replace the previous incorrectly recognized text with what follows this command.
