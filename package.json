@@ -1,0 +1,74 @@
+{
+	"name": "vscode-markdown-image-paste-pro",
+	"displayName": "Markdown Image Paste Pro",
+	"description": "Professional image paste functionality for markdown files in VS Code",
+	"version": "0.1.0",
+	"publisher": "eyk",
+	"engines": {
+		"vscode": "^1.80.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:markdown"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "markdown-image-paste-pro.pasteImage",
+				"title": "Paste Image"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "markdown-image-paste-pro.pasteImage",
+				"key": "ctrl+shift+v",
+				"mac": "cmd+shift+v",
+				"when": "editorTextFocus && editorLangId == 'markdown'"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Markdown Image Paste Pro",
+			"properties": {
+				"markdownImagePastePro.imagePath": {
+					"type": "string",
+					"default": "images",
+					"description": "The folder path to save images, relative to the current file or workspace root"
+				},
+				"markdownImagePastePro.imageNamePrefix": {
+					"type": "string",
+					"default": "image-",
+					"description": "Prefix for generated image filenames"
+				},
+				"markdownImagePastePro.imageNameFormat": {
+					"type": "string",
+					"default": "timestamp",
+					"enum": [
+						"timestamp",
+						"random"
+					],
+					"description": "Format for generated image filenames"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.80.0",
+		"@types/node": "20.x",
+		"@typescript-eslint/eslint-plugin": "^6.4.1",
+		"@typescript-eslint/parser": "^6.4.1",
+		"eslint": "^8.47.0",
+		"typescript": "^5.1.6"
+	}
+}
