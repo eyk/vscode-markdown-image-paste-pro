@@ -4,4 +4,14 @@
 	"files.watcherExclude": {},
 	"search.exclude": {},
 
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"args": [
+				"-NoExit",
+				"-Command",
+				". '${workspaceFolder}/.vscode/scripts/shorten-prompt-paths.ps1'"
+			]
+		}
+	},
 }
