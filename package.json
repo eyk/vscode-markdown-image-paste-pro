@@ -4,6 +4,10 @@
 	"description": "Professional image paste functionality for markdown files in VS Code",
 	"version": "0.1.0",
 	"publisher": "eyk",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/eyk/vscode-markdown-image-paste-pro.git"
+	},
 	"engines": {
 		"vscode": "^1.80.0"
 	},
