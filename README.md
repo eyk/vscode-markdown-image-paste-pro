@@ -11,6 +11,16 @@ Tired of generic GUID filenames cluttering your repository after pasting screens
 
 This extension follows a minimal-intervention philosophy — it intercepts the image paste flow only to prompt for alt-text and filename, then integrates seamlessly with VS Code's standard behavior. This design ensures maximum stability and implements what should ideally be core functionality.
 
+After pasting an image, you're prompted to enter alt-text:
+![Example 1](https://raw.githubusercontent.com/eyk/vscode-markdown-image-paste-pro/main/images/example-1.png)
+
+The filename is auto-suggested based on your alt-text:
+![Example 2](https://raw.githubusercontent.com/eyk/vscode-markdown-image-paste-pro/main/images/example-2.png)
+
+The file is saved and the markdown link is inserted:
+![Example 3](https://raw.githubusercontent.com/eyk/vscode-markdown-image-paste-pro/main/images/example-3.png)
+
+
 ## Features
 
 - **Single prompt upfront** — enter human-friendly alt-text (spaces allowed), auto-generates filename suggestion
