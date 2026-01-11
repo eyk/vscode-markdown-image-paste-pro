@@ -14,3 +14,7 @@ node_modules/**
 DEVELOPMENT.md
 icon.svg
 icon-copied.svg
+scripts/**
+out/test/**
+out/**/*.test.js
+images/**

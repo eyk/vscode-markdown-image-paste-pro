@@ -78,4 +78,47 @@ The extension registers a `DocumentPasteEditProvider` for Markdown files that:
 
 ## Publishing
 
-See VS Code extension publishing guide: https://code.visualstudio.com/api/working-with-extensions/publishing-extension
+### Setup
+
+1. **Create Personal Access Token:**
+   - Go to https://dev.azure.com
+   - User Settings → Personal Access Tokens → New Token
+   - Organization: All accessible organizations
+   - Scopes: **Marketplace** → **Manage** ✓
+   - Copy token (shown only once!)
+
+2. **Install vsce and login:**
+   ```bash
+   npm install -g @vscode/vsce
+   vsce login <your-publisher-id>
+   # Enter token when prompted
+   ```
+
+### Publish to Marketplace
+
+```bash
+# Publish current version
+vsce publish
+
+# Or publish with version bump
+vsce publish patch  # 1.0.0 → 1.0.1
+vsce publish minor  # 1.0.0 → 1.1.0
+vsce publish major  # 1.0.0 → 2.0.0
+```
+
+### Pre-Publish Checks
+
+```bash
+# Test package locally
+vsce package
+
+# Preview what will be published
+vsce ls
+
+# Install locally for testing
+code --install-extension <extension-name>-<version>.vsix
+```
+
+**Resources:**
+- [Publishing Guide](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
+- [Extension Marketplace](https://marketplace.visualstudio.com/)
