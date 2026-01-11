@@ -1,5 +1,10 @@
 # Markdown Image Paste Pro
 
+[![Tests](https://github.com/eyk/vscode-markdown-image-paste-pro/actions/workflows/test.yml/badge.svg)](https://github.com/eyk/vscode-markdown-image-paste-pro/actions/workflows/test.yml)
+[![VS Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/eyk.vscode-markdown-image-paste-pro)](https://marketplace.visualstudio.com/items?itemName=eyk.vscode-markdown-image-paste-pro)
+[![VS Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/eyk.vscode-markdown-image-paste-pro)](https://marketplace.visualstudio.com/items?itemName=eyk.vscode-markdown-image-paste-pro)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/eyk/vscode-markdown-image-paste-pro/blob/main/LICENSE)
+
 On paste: prompts for alt-text and auto-suggests kebab-case filename from it.
 
 Tired of generic GUID filenames cluttering your repository after pasting screenshots? This extension intercepts the paste operation before the file is created, prompting once for a descriptive name — the image is saved with the right filename from the start.
