@@ -56,6 +56,9 @@ When these commands appear in speech input, obey their intended meaning:
 - **Avoid chaining commands with `&&`** - each command needs separate user approval in chat
   - ❌ Bad: `git add . && git commit -m "..." && git push`
   - ✅ Good: Separate `run_in_terminal` calls for each command
+- **Always use `git mv` for tracked files** - preserves Git history
+  - ❌ Bad: `mv old.ts new.ts` (breaks Git tracking)
+  - ✅ Good: `git mv old.ts new.ts`
 
 
 ## CI Writing Rules
