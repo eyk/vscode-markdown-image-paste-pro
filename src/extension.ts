@@ -165,6 +165,7 @@ class MarkdownImagePasteProvider implements vscode.DocumentPasteEditProvider {
 
 	// Map MIME type to file extension
 	private getExtensionFromMimeType(mimeType: string): string {
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		const mapping: Record<string, string> = {
 			'image/png': '.png',
 			'image/jpeg': '.jpg',
