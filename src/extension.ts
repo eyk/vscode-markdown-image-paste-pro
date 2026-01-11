@@ -11,7 +11,8 @@ export function activate(context: vscode.ExtensionContext) {
 		{ language: 'markdown' },
 		new MarkdownImagePasteProvider(output),
 		{
-			providedPasteEditKinds: [vscode.DocumentDropOrPasteEditKind.Empty],
+			// Use a specific kind to take precedence over default paste handler
+			providedPasteEditKinds: [vscode.DocumentDropOrPasteEditKind.Empty.append('markdown', 'image')],
 			pasteMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/bmp']
 		}
 	);
@@ -34,7 +35,7 @@ class MarkdownImagePasteProvider implements vscode.DocumentPasteEditProvider {
 		// Check if clipboard contains image data
 		const imageItem = this.getImageFromDataTransfer(dataTransfer);
 		if (!imageItem) {
-			return undefined; // Let default paste handler take over
+			return undefined; // Let default paste handler take over (no image detected)
 		}
 
 		const { mimeType, data } = imageItem;
@@ -50,28 +51,64 @@ class MarkdownImagePasteProvider implements vscode.DocumentPasteEditProvider {
 		});
 
 		if (altText === undefined) {
-			return undefined; // User cancelled
+			// User cancelled - return empty edit to prevent default paste
+			const emptyEdit = new vscode.DocumentPasteEdit(
+				'',
+				'Cancel',
+				vscode.DocumentDropOrPasteEditKind.Empty.append('markdown', 'image')
+			);
+			return [emptyEdit];
 		}
 
 		// Dialog 2: Prompt for filename with kebab-case suggestion from alt-text
+		// Loop until user provides a valid filename or cancels
 		const suggestedFilename = this.toKebabCase(altText);
 		const extension = this.getExtensionFromMimeType(mimeType);
-		const filenameInput = await vscode.window.showInputBox({
-			prompt: 'Enter filename (without extension)',
-			placeHolder: 'filename',
-			value: suggestedFilename,
-			valueSelection: [0, suggestedFilename.length]
-		});
-
-		if (filenameInput === undefined) {
-			return undefined; // User cancelled
-		}
-
-		const fullFilename = `${filenameInput}${extension}`;
-
-		// Save image to same directory as markdown file
 		const documentDir = path.dirname(document.uri.fsPath);
-		const imagePath = path.join(documentDir, fullFilename);
+
+		let fullFilename: string;
+		let imagePath: string;
+
+		while (true) {
+			const filenameInput = await vscode.window.showInputBox({
+				prompt: 'Enter filename (without extension)',
+				placeHolder: 'filename',
+				value: suggestedFilename,
+				valueSelection: [0, suggestedFilename.length]
+			});
+
+			if (filenameInput === undefined) {
+				// User cancelled - return empty edit to prevent default paste
+				const emptyEdit = new vscode.DocumentPasteEdit(
+					'',
+					'Cancel',
+					vscode.DocumentDropOrPasteEditKind.Empty.append('markdown', 'image')
+				);
+				return [emptyEdit];
+			}
+
+			fullFilename = `${filenameInput}${extension}`;
+			imagePath = path.join(documentDir, fullFilename);
+
+			// Check if file already exists
+			try {
+				await fs.access(imagePath);
+				// File exists - ask user if they want to overwrite
+				const overwrite = await vscode.window.showWarningMessage(
+					`File "${fullFilename}" already exists. Overwrite?`,
+					{ modal: true },
+					'Yes'
+				);
+
+				if (overwrite === 'Yes') {
+					break; // Continue with overwrite
+				}
+				// If dismissed (ESC), loop back to filename prompt
+			} catch {
+				// File does not exist - we can proceed
+				break;
+			}
+		}
 
 		try {
 			const fileData = data.asFile();
@@ -84,13 +121,23 @@ class MarkdownImagePasteProvider implements vscode.DocumentPasteEditProvider {
 			}
 		} catch (error) {
 			vscode.window.showErrorMessage(`Failed to save image: ${error}`);
-			return undefined;
+			// Error occurred - return empty edit to prevent default paste
+			const emptyEdit = new vscode.DocumentPasteEdit(
+				'',
+				'Error',
+				vscode.DocumentDropOrPasteEditKind.Empty.append('markdown', 'image')
+			);
+			return [emptyEdit];
 		}
 
 		// Create markdown image syntax with original alt-text
 		const markdownLink = `![${altText.trim()}](${fullFilename})`;
 
-		const edit = new vscode.DocumentPasteEdit(markdownLink, 'Insert Image', vscode.DocumentDropOrPasteEditKind.Empty);
+		const edit = new vscode.DocumentPasteEdit(
+			markdownLink,
+			'Insert Image',
+			vscode.DocumentDropOrPasteEditKind.Empty.append('markdown', 'image')
+		);
 		return [edit];
 	}
 
