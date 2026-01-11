@@ -12,12 +12,25 @@ Create, configure, test, and publish VS Code extensions with extension-specific 
 1. **Initialize** - Create package.json with extension manifest
 2. **Implement** - Write extension.ts with activate/deactivate
 3. **Test** - Set up @vscode/test-electron with CI
-4. **Publish** - Configure .vscodeignore and vsce
+4. **Publish** - Bump version, update CHANGELOG, push to main → automated publishing
+
+## Publishing Process
+
+1. Update CHANGELOG.md with new version section
+2. Bump version in package.json (semantic versioning)
+3. Commit and push to main
+4. GitHub Actions automatically:
+   - Creates Git tag
+   - Publishes to marketplace (if version not already published)
+   - Skips if tag exists (idempotent)
 
 ## Critical Learnings
 
 ### Activation Events
 `onCommand:extension.commandId` (load when command executed) preferred over `*` (load on startup)
+
+### CI Test Workflow
+Tests run on `pull_request` only, not on `push` to main (avoids redundant post-merge execution)
 
 ### .vscodeignore
 ```

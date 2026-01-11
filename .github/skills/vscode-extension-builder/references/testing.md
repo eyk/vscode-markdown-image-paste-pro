@@ -38,7 +38,15 @@ export function run(): Promise<void> {
 
 ## GitHub Actions CI
 
+**Best Practice:** Run tests only on pull requests (not on push to main after merge)
+
 ```yaml
+name: Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -60,4 +68,7 @@ jobs:
         if: runner.os == 'Linux'
 ```
 
-**Critical**: Linux needs `xvfb-run -a` for GUI tests
+**Key decisions:**
+- ✅ `pull_request` trigger only - prevents redundant test runs after merge
+- ❌ `push` to main - tests already ran in PR, publishing workflow handles deployment
+- **Critical**: Linux needs `xvfb-run -a` for GUI tests
