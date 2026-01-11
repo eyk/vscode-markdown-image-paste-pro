@@ -8,6 +8,16 @@
 - `tsconfig.json` - TypeScript configuration
 
 
+## Prerequisites
+
+- **Node.js** 18.x or 20.x
+- **npm** (comes with Node.js)
+- **Inkscape** (optional, for icon generation)
+  - Windows: `winget install Inkscape.Inkscape`
+  - macOS: `brew install inkscape`
+  - Linux: `apt install inkscape`
+
+
 ## Setup
 
 ```bash
