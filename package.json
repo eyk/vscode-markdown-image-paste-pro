@@ -19,44 +19,10 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "markdown-image-paste-pro.pasteImage",
-				"title": "Paste Image"
-			}
-		],
-		"keybindings": [
-			{
-				"command": "markdown-image-paste-pro.pasteImage",
-				"key": "ctrl+shift+v",
-				"mac": "cmd+shift+v",
-				"when": "editorTextFocus && editorLangId == 'markdown'"
-			}
-		],
 		"configuration": {
 			"type": "object",
 			"title": "Markdown Image Paste Pro",
-			"properties": {
-				"markdownImagePastePro.imagePath": {
-					"type": "string",
-					"default": "images",
-					"description": "The folder path to save images, relative to the current file or workspace root"
-				},
-				"markdownImagePastePro.imageNamePrefix": {
-					"type": "string",
-					"default": "image-",
-					"description": "Prefix for generated image filenames"
-				},
-				"markdownImagePastePro.imageNameFormat": {
-					"type": "string",
-					"default": "timestamp",
-					"enum": [
-						"timestamp",
-						"random"
-					],
-					"description": "Format for generated image filenames"
-				}
-			}
+			"properties": {}
 		}
 	},
 	"scripts": {
