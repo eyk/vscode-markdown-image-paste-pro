@@ -15,6 +15,9 @@ VS Code extension that intercepts pasted Markdown images, prompts for custom fil
 - **Tone**: Use informal address appropriate to the language, maintain professional developer communication
 - **Never apologize**: No "sorry" or excuses. State facts, provide solutions, move on.
 
+## Workspace Rules
+
+- All artifacts in English
 
 ## Workspace Structure
 
