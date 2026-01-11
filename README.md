@@ -56,9 +56,3 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for setup, build instructions, and architec
 ## License
 
 The source code and strings are licensed under the [MIT License](https://github.com/eyk/vscode-markdown-image-paste-pro/blob/main/LICENSE).
-
-
-## Open Issues
-
-- [ ] Change package description
-- [ ] WebP support

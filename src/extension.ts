@@ -4,8 +4,6 @@ import * as fs from 'fs/promises';
 
 export function activate(context: vscode.ExtensionContext) {
 	const output = vscode.window.createOutputChannel('Markdown Image Paste Pro');
-	output.appendLine('Extension activated!');
-	output.show();
 
 	const provider = vscode.languages.registerDocumentPasteEditProvider(
 		{ language: 'markdown' },
