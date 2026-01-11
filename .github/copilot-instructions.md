@@ -14,6 +14,7 @@ VS Code extension that intercepts pasted Markdown images, prompts for custom fil
 - **File paths**: Use relative paths from workspace root. One per line for Ctrl+P navigation.
 - **Tone**: Use informal address appropriate to the language, maintain professional developer communication
 - **Never apologize**: No "sorry" or excuses. State facts, provide solutions, move on.
+- **Never use code blocks for text suggestions**: Forces horizontal scrolling, terrible UX. Use plain text or bullet points for text/description alternatives
 
 ## Workspace Rules
 

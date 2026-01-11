@@ -1,8 +1,8 @@
 {
 	"name": "vscode-markdown-image-paste-pro",
 	"displayName": "Markdown Image Paste Pro",
-	"description": "Professional image paste functionality for markdown files in VS Code",
-	"version": "1.0.0",
+	"description": "Effortlessly define alt-text and filename as you paste",
+	"version": "1.0.1",
 	"publisher": "eyk",
 	"icon": "icon.png",
 	"repository": {
