@@ -2,33 +2,42 @@
 
 On paste: prompts for alt-text and auto-suggests kebab-case filename from it.
 
-## Usage
+Tired of generic GUID filenames cluttering your repository after pasting screenshots? This extension intercepts the paste operation before the file is created, prompting once for a descriptive name — the image is saved with the right filename from the start.
 
-Paste images as usual in markdown files - the extension intercepts and prompts for alt-text and filename.
+This extension follows a minimal-intervention philosophy — it intercepts the image paste flow only to prompt for alt-text and filename, then integrates seamlessly with VS Code's standard behavior. This design ensures maximum stability and implements what should ideally be core functionality.
+
+## Features
+
+- **Single prompt upfront** — enter human-friendly alt-text (spaces allowed), auto-generates filename suggestion
+- **Filename auto-derived** — kebab-case generated from alt-text, confirm with Enter or customize as needed
+- **Collision handling** — warns on existing files, allows overwrite or jumps back to rename
+- **Clean abort** — ESC at any prompt cancels entirely (no image inserted), retry paste anytime
+- **Zero configuration** — works out of the box
 
 
-## Project Structure
+## Planned Features
 
-- `src/extension.ts` - Main extension entry point
-- `package.json` - Extension manifest and dependencies
-- `tsconfig.json` - TypeScript configuration
+Additional image format support (WebP, JPEG) is under consideration. If you'd like to see this feature, show your interest by:
+- ⭐ Starring the project on [GitHub](https://github.com/eyk/vscode-markdown-image-paste-pro)
+- ⭐ Rating the extension on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=eyk.vscode-markdown-image-paste-pro&ssr=false#review-details)
+
+**Preview of planned configuration:**
+
+```json
+{
+  "markdownImagePastePro.defaultFormat": "png",  // png | webp | jpeg
+  "markdownImagePastePro.promptForFormat": false  // if true, adds format picker (↑/↓ navigation, default pre-selected)
+}
+```
+
+With `promptForFormat` enabled, workflow becomes: Alt-text → Enter → Filename → Enter → Format (↑/↓) → Enter
 
 
 ## Development
 
-```bash
-# Once after checkout
-npm install
+See [DEVELOPMENT.md](DEVELOPMENT.md) for setup, build instructions, and architecture details.
 
-# One time compilation
-npm run compile
 
-# Watch Mode (recommended)
-npm run watch
+## License
 
-# Run tests
-npm test
-
-```
-
-Press `F5` in VS Code to launch the Extension Development Host with the extension loaded.
+The source code and strings are licensed under the [MIT License](https://github.com/eyk/vscode-markdown-image-paste-pro/blob/main/LICENSE).
