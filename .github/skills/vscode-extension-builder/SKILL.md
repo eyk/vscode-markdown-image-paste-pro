@@ -1,5 +1,5 @@
 ---
-name: vscode-extension-creator
+name: vscode-extension-builder
 description: Specialized knowledge for creating, configuring, testing, and publishing VS Code extensions. Use when creating a new VS Code extension from scratch, setting up extension infrastructure (package.json contributes, activation events, testing), configuring extension publishing (.vscodeignore, vsce, marketplace), debugging extension-specific issues (CI failures, marketplace rendering), or implementing extension best practices.
 ---
 
