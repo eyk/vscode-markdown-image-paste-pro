@@ -32,7 +32,8 @@
 		"watch": "tsc -w --preserveWatchOutput -p ./",
 		"pretest": "npm run compile && npm run lint",
 		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
+		"test": "node ./out/test/runTest.js",
+		"icon": "inkscape icon.svg --export-type=png --export-filename=icon.png --export-width=128 --export-height=128"
 	},
 	"devDependencies": {
 		"@types/glob": "^9.0.0",
