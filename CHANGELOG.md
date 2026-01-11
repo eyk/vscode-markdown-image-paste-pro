@@ -4,19 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2026-01-11
 
-### Added
-- Initial VS Code extension structure
-- Basic image paste command for markdown files
-- Configurable image save path, filename prefix, and naming format
-- Keyboard shortcut (Ctrl/Cmd+Shift+V) for quick image pasting
-- Automatic creation of image directories
-- TypeScript build system with ESLint
+### Initial Release
 
-## [0.1.0] - 2026-01-10
+- Alt-text prompt on image paste with human-friendly input (spaces allowed)
+- Auto-generated kebab-case filename derived from alt-text
+- Customizable filename with instant preview
+- File collision detection with overwrite confirmation
+- Clean abort on ESC (no fallback to default paste behavior)
+- Images saved next to Markdown file with proper relative paths
+- Zero configuration required
 
-### Added
-- Basic extension scaffold
-- Command palette integration
-- Configuration options for image handling
+[1.0.0]: https://github.com/eyk/vscode-markdown-image-paste-pro/releases/tag/v1.0.0
