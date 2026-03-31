@@ -2,7 +2,7 @@
 	"name": "vscode-markdown-image-paste-pro",
 	"displayName": "Markdown Image Paste Pro",
 	"description": "Effortlessly define alt-text and filename as you paste",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"publisher": "eyk",
 	"icon": "icon.png",
 	"repository": {
