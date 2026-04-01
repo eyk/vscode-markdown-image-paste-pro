@@ -23,7 +23,19 @@
 		"configuration": {
 			"type": "object",
 			"title": "Markdown Image Paste Pro",
-			"properties": {}
+			"properties": {
+				"markdownImagePastePro.defaultFormat": {
+					"type": "string",
+					"enum": ["png", "webp", "jpeg", "avif"],
+					"default": "png",
+					"description": "Default image format for pasted images. Images are converted from clipboard format (usually PNG) to the selected format."
+				},
+				"markdownImagePastePro.promptForFormat": {
+					"type": "boolean",
+					"default": false,
+					"description": "If true, shows a format picker after the filename prompt. The default format is pre-selected."
+				}
+			}
 		}
 	},
 	"scripts": {
@@ -47,5 +59,8 @@
 		"glob": "^13.0.0",
 		"mocha": "^11.7.5",
 		"typescript": "^5.1.6"
+	},
+	"dependencies": {
+		"sharp": "^0.34.5"
 	}
 }
