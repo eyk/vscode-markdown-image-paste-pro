@@ -1,8 +1,8 @@
 # Markdown Image Paste Pro
 
 [![Tests](https://github.com/eyk/vscode-markdown-image-paste-pro/actions/workflows/test.yml/badge.svg)](https://github.com/eyk/vscode-markdown-image-paste-pro/actions/workflows/test.yml)
-[![VS Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/eyk.vscode-markdown-image-paste-pro)](https://marketplace.visualstudio.com/items?itemName=eyk.vscode-markdown-image-paste-pro)
-[![VS Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/eyk.vscode-markdown-image-paste-pro)](https://marketplace.visualstudio.com/items?itemName=eyk.vscode-markdown-image-paste-pro)
+[![VS Marketplace Version](https://vsmarketplacebadges.dev/version-short/eyk.vscode-markdown-image-paste-pro.svg)](https://marketplace.visualstudio.com/items?itemName=eyk.vscode-markdown-image-paste-pro)
+[![VS Marketplace Installs](https://vsmarketplacebadges.dev/installs-short/eyk.vscode-markdown-image-paste-pro.svg)](https://marketplace.visualstudio.com/items?itemName=eyk.vscode-markdown-image-paste-pro)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/eyk/vscode-markdown-image-paste-pro/blob/main/LICENSE)
 
 On paste: prompts for alt-text and auto-suggests kebab-case filename from it.
@@ -25,28 +25,31 @@ The file is saved and the markdown link is inserted:
 
 - **Single prompt upfront** — enter human-friendly alt-text (spaces allowed), auto-generates filename suggestion
 - **Filename auto-derived** — kebab-case generated from alt-text, confirm with Enter or customize as needed
+- **Format conversion** — convert pasted images to WebP, JPEG, or AVIF for smaller file sizes
 - **Collision handling** — warns on existing files, allows overwrite or jumps back to rename
 - **Clean abort** — ESC at any prompt cancels entirely (no image inserted), retry paste anytime
-- **Zero configuration** — works out of the box
+- **Zero configuration** — works out of the box with PNG (original behavior)
 
 
-## Planned Features
-
-Additional image format support (WebP, JPEG) is under consideration. If you'd like to see this feature, show your interest by:
-- ⭐ Starring the project on [GitHub](https://github.com/eyk/vscode-markdown-image-paste-pro)
-- ⭐ Rating the extension on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=eyk.vscode-markdown-image-paste-pro&ssr=false#review-details)
-
-**Preview of planned configuration:**
+## Configuration
 
 ```json
 {
-  "markdownImagePastePro.defaultFormat": "png",  // png | webp | jpeg
-  "markdownImagePastePro.promptForFormat": false  // if true, adds format picker (↑/↓ navigation, default pre-selected)
+  "markdownImagePastePro.defaultFormat": "png",   // png | webp | jpeg | avif
+  "markdownImagePastePro.promptForFormat": false  // if true, adds format picker after filename prompt
 }
 ```
 
+| Setting | Values | Default | Description |
+|---------|--------|---------|-------------|
+| `defaultFormat` | `png`, `webp`, `jpeg`, `avif` | `png` | Target format for pasted images. Images are converted from clipboard format (usually PNG). |
+| `promptForFormat` | `true`, `false` | `false` | Shows a format picker (↑/↓ navigation) after the filename prompt. The default format is pre-selected. |
+
 With `promptForFormat` enabled, workflow becomes: Alt-text → Enter → Filename → Enter → Format (↑/↓) → Enter
 
+**Quality defaults** (not configurable): WebP 90, JPEG 92, AVIF 80 — optimized for screenshots and documentation images.
+
+If conversion fails (e.g. platform incompatibility), the image is saved as PNG with a warning notification offering to report the issue or revert settings.
 
 ## Development
 
@@ -56,3 +59,9 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for setup, build instructions, and architec
 ## License
 
 The source code and strings are licensed under the [MIT License](https://github.com/eyk/vscode-markdown-image-paste-pro/blob/main/LICENSE).
+
+
+## To-Do
+
+- Simplify paste, only one `Enter` for default behaviour and `Ctrl + Enter` for options: The plan is to register a custom command in a VS Code extension and bind it to Ctrl+Enter via contributes.keybindings, scoped by an appropriate when clause (identified using Developer: Inspect Context Keys) so the shortcut only triggers when the prompt input is focused.
+- user.email

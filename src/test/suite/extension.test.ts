@@ -11,14 +11,41 @@ class TestableMarkdownImagePasteProvider {
 	}
 
 	getExtensionFromMimeType(mimeType: string): string {
-		// eslint-disable-next-line @typescript-eslint/naming-convention
+		/* eslint-disable @typescript-eslint/naming-convention */
 		const mapping: Record<string, string> = {
 			'image/png': '.png',
 			'image/jpeg': '.jpg',
 			'image/gif': '.gif',
-			'image/bmp': '.bmp'
+			'image/bmp': '.bmp',
+			'image/webp': '.webp',
+			'image/avif': '.avif'
 		};
+		/* eslint-enable @typescript-eslint/naming-convention */
 		return mapping[mimeType] || '.png';
+	}
+
+	getExtensionFromFormat(format: string): string {
+		const mapping: Record<string, string> = {
+			'png': '.png',
+			'webp': '.webp',
+			'jpeg': '.jpg',
+			'avif': '.avif'
+		};
+		return mapping[format] || '.png';
+	}
+
+	getFormatFromMimeType(mimeType: string): string {
+		/* eslint-disable @typescript-eslint/naming-convention */
+		const mapping: Record<string, string> = {
+			'image/png': 'png',
+			'image/jpeg': 'jpeg',
+			'image/gif': 'gif',
+			'image/bmp': 'bmp',
+			'image/webp': 'webp',
+			'image/avif': 'avif'
+		};
+		/* eslint-enable @typescript-eslint/naming-convention */
+		return mapping[mimeType] || 'png';
 	}
 
 	generateDefaultFilename(): string {
@@ -89,12 +116,64 @@ suite('Extension Test Suite', () => {
 			assert.strictEqual(provider.getExtensionFromMimeType('image/bmp'), '.bmp');
 		});
 
+		test('returns .webp for image/webp', () => {
+			assert.strictEqual(provider.getExtensionFromMimeType('image/webp'), '.webp');
+		});
+
+		test('returns .avif for image/avif', () => {
+			assert.strictEqual(provider.getExtensionFromMimeType('image/avif'), '.avif');
+		});
+
 		test('returns .png as fallback for unknown type', () => {
-			assert.strictEqual(provider.getExtensionFromMimeType('image/webp'), '.png');
+			assert.strictEqual(provider.getExtensionFromMimeType('image/tiff'), '.png');
 		});
 
 		test('returns .png as fallback for invalid type', () => {
 			assert.strictEqual(provider.getExtensionFromMimeType('invalid/type'), '.png');
+		});
+	});
+
+	suite('getExtensionFromFormat', () => {
+		test('returns .png for png', () => {
+			assert.strictEqual(provider.getExtensionFromFormat('png'), '.png');
+		});
+
+		test('returns .webp for webp', () => {
+			assert.strictEqual(provider.getExtensionFromFormat('webp'), '.webp');
+		});
+
+		test('returns .jpg for jpeg', () => {
+			assert.strictEqual(provider.getExtensionFromFormat('jpeg'), '.jpg');
+		});
+
+		test('returns .avif for avif', () => {
+			assert.strictEqual(provider.getExtensionFromFormat('avif'), '.avif');
+		});
+
+		test('returns .png as fallback for unknown format', () => {
+			assert.strictEqual(provider.getExtensionFromFormat('bmp'), '.png');
+		});
+	});
+
+	suite('getFormatFromMimeType', () => {
+		test('returns png for image/png', () => {
+			assert.strictEqual(provider.getFormatFromMimeType('image/png'), 'png');
+		});
+
+		test('returns jpeg for image/jpeg', () => {
+			assert.strictEqual(provider.getFormatFromMimeType('image/jpeg'), 'jpeg');
+		});
+
+		test('returns webp for image/webp', () => {
+			assert.strictEqual(provider.getFormatFromMimeType('image/webp'), 'webp');
+		});
+
+		test('returns avif for image/avif', () => {
+			assert.strictEqual(provider.getFormatFromMimeType('image/avif'), 'avif');
+		});
+
+		test('returns png as fallback for unknown MIME type', () => {
+			assert.strictEqual(provider.getFormatFromMimeType('image/tiff'), 'png');
 		});
 	});
 

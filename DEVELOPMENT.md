@@ -61,18 +61,35 @@ The extension activates automatically when opening a Markdown file.
 
 The extension registers a `DocumentPasteEditProvider` for Markdown files that:
 
-1. Detects image MIME types in clipboard (`image/png`, `image/jpeg`, `image/gif`, `image/bmp`)
-2. Prompts for alt-text (pre-filled with timestamp-based suggestion)
-3. Prompts for filename (pre-filled with kebab-case version of alt-text)
-4. Checks if file exists → prompts to overwrite
-5. Saves image to same directory as Markdown file
-6. Inserts `![alt-text](filename.ext)` into document
+1. Detects image MIME types in clipboard (`image/png`, `image/jpeg`, `image/gif`, `image/bmp`, `image/webp`, `image/avif`)
+2. Reads settings (`defaultFormat`, `promptForFormat`)
+3. Prompts for alt-text (pre-filled with timestamp-based suggestion)
+4. Prompts for filename (pre-filled with kebab-case version of alt-text)
+5. Optionally shows format picker (if `promptForFormat` is enabled)
+6. Converts image to target format using sharp (with graceful PNG fallback on error)
+7. Checks if file exists → prompts to overwrite
+8. Saves image to same directory as Markdown file
+9. Inserts `![alt-text](filename.ext)` into document
+
+### Image Conversion
+
+Uses [sharp](https://sharp.pixelplumbing.com/) for format conversion with hardcoded quality defaults:
+- **WebP**: quality 90
+- **JPEG**: quality 92
+- **AVIF**: quality 80
+- **PNG**: lossless (no quality parameter)
+
+If source format matches target format, the buffer is passed through without re-encoding.
+On conversion failure, falls back to PNG and shows a warning with pre-filled GitHub issue URL.
 
 
 ### Helper Functions
 
 - `toKebabCase()` - Converts text to kebab-case (lowercase, alphanumeric + dashes only)
 - `getExtensionFromMimeType()` - Maps MIME types to file extensions
+- `getExtensionFromFormat()` - Maps format names (png, webp, jpeg, avif) to file extensions
+- `getFormatFromMimeType()` - Maps MIME types to format names
+- `convertImage()` - Converts image buffer to target format with fallback
 - `generateDefaultFilename()` - Creates timestamp-based default filename
 
 
