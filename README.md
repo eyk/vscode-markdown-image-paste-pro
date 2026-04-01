@@ -65,3 +65,4 @@ The source code and strings are licensed under the [MIT License](https://github.
 ## To-Do
 
 - Simplify paste, only one `Enter` for default behaviour and `Ctrl + Enter` for options: The plan is to register a custom command in a VS Code extension and bind it to Ctrl+Enter via contributes.keybindings, scoped by an appropriate when clause (identified using Developer: Inspect Context Keys) so the shortcut only triggers when the prompt input is focused.
+- ...
